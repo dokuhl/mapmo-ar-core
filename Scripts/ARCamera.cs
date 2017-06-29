@@ -49,6 +49,7 @@ public class ARCamera : MonoBehaviour
         //const float minDistanceInMetres = 1;
         //AGGPS.RequestLocationUpdates(minTimeInMillis, minDistanceInMetres, OnLocationChanged);
         currentOrientation = Input.deviceOrientation;
+        //initialize heading_correction_table with all null
         for(int i = 0; i< heading_correction_table.Length; i++)
         {
             heading_correction_table[i] = null;
