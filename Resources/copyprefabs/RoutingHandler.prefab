@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1293403831542064}
+  m_IsPrefabParent: 1
+--- !u!1 &1293403831542064
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4801077725269800}
+  - component: {fileID: 114116019623205266}
+  m_Layer: 0
+  m_Name: RoutingHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &4801077725269800
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1293403831542064}
+  m_LocalRotation: {x: -0, y: -0.10452836, z: -0, w: -0.9945219}
+  m_LocalPosition: {x: 0, y: 32, z: 0}
+  m_LocalScale: {x: 4749.9995, y: 2000, z: 4749.9995}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114116019623205266
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1293403831542064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f3398646c7cddc4da2fc28ca9d88366, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  step_threshold: 20
+  dest_lat: 0
+  dest_lon: 0
+  routingDialogue: {fileID: 0}
+  calculatingRouteDialogue: {fileID: 0}
+  nav_steps: []
+  nav_step_dir_arrows: []
+  initiated: 0
+  reroute_threshold: 10
+  remove_threshold: 5
+  street_width: 20
