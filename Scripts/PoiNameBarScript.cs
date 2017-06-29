@@ -138,8 +138,8 @@ public class PoiNameBarScript : MonoBehaviour {
             
 
         camera_script.camera_fixed = true;
-        if(NatCamU.Core.NatCam.Camera != null)
-            NatCamU.Core.NatCam.Pause();
+        NatCamProjectController.getInstance().Pause();
+         
         minimize_view.SetActive(false);
         expand_view.SetActive(true);
         for (int i = 0; i < pois.Count; ++i)
@@ -164,8 +164,8 @@ public class PoiNameBarScript : MonoBehaviour {
     public void minimize()
     {
         camera_script.camera_fixed = false;
-        if (NatCamU.Core.NatCam.Camera != null)
-            NatCamU.Core.NatCam.Play();
+
+        NatCamProjectController.getInstance().Play();
         for (int i = 0; i < list_items.Count; ++i)
             DestroyImmediate(list_items[i], true);
         list_items.Clear();
