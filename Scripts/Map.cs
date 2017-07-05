@@ -176,7 +176,7 @@ public class Map : MonoBehaviour {
 
         lat = 51.0535469055176;
         lon = 13.735987663269;
-        GameObject.Find("skybox_container").GetComponent<Skybox>().showDistrict("http://dokuhl.de/Theaterplatz.jpg");
+        GameObject.Find("skybox_container").GetComponent<Skybox>().showDistrict("http://mapmo.de/wp-content/uploads/Theaterplatz.jpg");
         ////lat = 51.0291588;
         ////lon = 13.7194578;
         ////lat = 50.110479;
