@@ -260,8 +260,16 @@ public class ARCamera : MonoBehaviour
                
             }
             if (current_heading_correction == null) current_heading_correction = 0;
-            float deltaTime = Time.deltaTime* Mathf.Abs((float)(transform.eulerAngles.y-compass.eulerAngles.y - current_heading_correction));
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(compass.eulerAngles.x, (float)(compass.eulerAngles.y + current_heading_correction), compass.eulerAngles.z), deltaTime);
+            float deltaDegrees = Mathf.Abs((float)(transform.eulerAngles.y - compass.eulerAngles.y - current_heading_correction));
+            float newHeading = (float)(compass.eulerAngles.y + current_heading_correction);
+            if (deltaDegrees > 180)
+            {
+                newHeading += (newHeading > 180) ? -360 : 360;
+                deltaDegrees = Mathf.Abs(transform.eulerAngles.y - newHeading);
+            }
+            float deltaTime = Time.deltaTime* deltaDegrees;
+            
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(compass.eulerAngles.x, newHeading, compass.eulerAngles.z), deltaTime);
             //transform.eulerAngles = new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + heading_correction, transform.rotation.eulerAngles.z);
         }else
         {
