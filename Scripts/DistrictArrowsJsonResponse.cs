@@ -23,7 +23,7 @@ public class DistrictArrowJsonResponse_DistrictArrow : IComparable<DistrictArrow
 
     public int CompareTo(DistrictArrowJsonResponse_DistrictArrow other)
     {
-        return other.dist_to_center.CompareTo(this.dist_to_center);
+        return this.dist_to_center.CompareTo(other.dist_to_center);
     }
 
     public float getDistToCenter()

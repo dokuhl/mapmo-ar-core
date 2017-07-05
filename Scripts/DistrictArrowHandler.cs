@@ -54,6 +54,12 @@ public class DistrictArrowHandler : MonoBehaviour {
             bool create = true;
             for (int j = 0; j < district_arrows.Count; ++j)
             {
+                if(district_arrows[j].GetComponent<DistrictArrow>().dist_to_center==0)
+                {
+                    Debug.Log(district_arrows_loaded[i].original_name + " " + j);
+                    del.Add(district_arrows[j]);
+                    continue;
+                }
                 if (district_arrows[j].GetComponent<DistrictArrow>().dist_to_center <= district_arrows_loaded[i].getDistToCenter() && Mathf.Abs(district_arrows_loaded[i].getBearing() - district_arrows[j].GetComponent<DistrictArrow>().bearing) < 45 || district_arrows_loaded[i].original_name.Equals(district_arrows[j].GetComponent<DistrictArrow>().district_name))
                 {
                     create = false;
