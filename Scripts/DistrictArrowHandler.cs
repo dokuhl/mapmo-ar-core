@@ -56,7 +56,6 @@ public class DistrictArrowHandler : MonoBehaviour {
             {
                 if(district_arrows[j].GetComponent<DistrictArrow>().dist_to_center==0)
                 {
-                    Debug.Log(district_arrows_loaded[i].original_name + " " + j);
                     del.Add(district_arrows[j]);
                     continue;
                 }

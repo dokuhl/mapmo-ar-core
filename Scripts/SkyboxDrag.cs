@@ -17,6 +17,8 @@ public class SkyboxDrag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
     {
         speedH = GameObject.Find("Map").GetComponent<Map>().horizontalFov / Screen.width;
         speedV = GameObject.Find("Map").GetComponent<Map>().fov / Screen.height;
+        if (maincamera == null)
+            maincamera = GameObject.Find("Main Camera");
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -43,8 +45,9 @@ public class SkyboxDrag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
     public void OnEndDrag(PointerEventData eventData)
     {
         ARCamera arc = maincamera.GetComponent<ARCamera>();
+
         Quaternion compass = new Quaternion(maincamera.GetComponent<ARCamera>().o[0], maincamera.GetComponent<ARCamera>().o[1], maincamera.GetComponent<ARCamera>().o[2], maincamera.GetComponent<ARCamera>().o[3]);
-        if (!transform.parent.GetComponent<Skybox>().isDistrict && !transform.parent.GetComponent<Skybox>().isInside) {
+        if (!GameObject.Find("skybox_container").GetComponent<Skybox>().isDistrict && !GameObject.Find("skybox_container").GetComponent<Skybox>().isInside) {
             maincamera.GetComponent<ARCamera>().heading_correction = maincamera.transform.rotation.eulerAngles.y - compass.eulerAngles.y;
             //GameObject.Find("Main Camera").GetComponent<ARCamera>().heading_correction = GameObject.Find("Main Camera").transform.rotation.eulerAngles.y - GameObject.Find("Main Camera").GetComponent<ARCamera>().compassHeading;
             maincamera.GetComponent<ARCamera>().camera_fixed = false;
@@ -67,32 +70,9 @@ public class SkyboxDrag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
 
         return new Vector3(α_x,  α_z, 0);
     }
-    void InvertSphere()
-    {
-        Vector3[] normals = GetComponent<MeshFilter>().mesh.normals;
-        for (int i = 0; i < normals.Length; i++)
-        {
-            normals[i] = -normals[i];
-        }
-        GetComponent<MeshFilter>().sharedMesh.normals = normals;
-
-        int[] triangles = GetComponent<MeshFilter>().sharedMesh.triangles;
-
-        for (int i = 0; i < triangles.Length; i += 3)
-        {
-            int t = triangles[i];
-            triangles[i] = triangles[i + 2];
-            triangles[i + 2] = t;
-
-        }
-
-        GetComponent<MeshFilter>().sharedMesh.triangles = triangles;
-        transform.GetComponent<Renderer>().material.renderQueue = 2002;
-    }
+    
     // Use this for initialization
     void Start () {
-        InvertSphere();
-        gameObject.AddComponent<MeshCollider>();
     }
 	
 	// Update is called once per frame
