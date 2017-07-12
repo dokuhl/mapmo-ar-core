@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class DistrictArrow : MonoBehaviour, IPointerClickHandler {
     public float lat;
@@ -74,6 +75,8 @@ public class DistrictArrow : MonoBehaviour, IPointerClickHandler {
         map.lat = this.lat;
         map.lon = this.lon;
         map.updateCenter();
+
+        GameObject.Find("DistrictArrowHandler").GetComponent<DistrictArrowHandler>().enableDistrictArrowsCollider();
         GameObject.Find("skybox_container").GetComponent<Skybox>().showDistrict(this.skybox_img);
     }
 }

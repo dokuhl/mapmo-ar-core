@@ -126,8 +126,12 @@ public class Map : MonoBehaviour {
     {
         return dist(this.lat, lat, this.lon, lon);
     }
-    
-    
+    public double dist2(double lat, double lon)
+    {
+        return dist(lat, this.lat, lon, this.lon);
+    }
+
+
     public static double bearing(double lat1, double lon1, double lat2, double lon2)
     {
         double φ1 = Mathf.Deg2Rad * lat1;

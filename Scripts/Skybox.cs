@@ -16,6 +16,7 @@ public class Skybox : EventBehaviour {
     public string district_image = "";
     Texture2D cached_skybox;
     private Transform skyboxTransform;
+    private Texture2D default_skybox;
 	void Start ()
     {
         skyboxTransform = transform.Find("skybox");
@@ -165,8 +166,16 @@ public class Skybox : EventBehaviour {
         //GameObject.Find("Main Camera").GetComponent<DialogueHandler>().showLoadingScreen("going to district");
         if (image.Equals("") || image == null)
         {
+
+            Texture t = skyboxTransform.GetComponent<Renderer>().material.mainTexture;
+            if(t!=null && t.name != "360_standard")
+            {
+                Destroy(t);
+            }
             //standard image
-            skyboxTransform.GetComponent<Renderer>().material.mainTexture = Resources.Load("Textures/360_standard", typeof(Texture2D)) as Texture2D;
+            if (default_skybox == null)
+                default_skybox = Resources.Load("Textures/360_standard", typeof(Texture2D)) as Texture2D;
+            skyboxTransform.GetComponent<Renderer>().material.mainTexture = default_skybox;
             fadeIn();
         }
         else
@@ -183,7 +192,13 @@ public class Skybox : EventBehaviour {
         WWW www = new WWW(image);
         yield return www;
         GameObject.Find("Main Camera").GetComponent<ARCamera>().camera_fixed = false;
+        Texture t = skyboxTransform.GetComponent<Renderer>().material.mainTexture;
+        if (t != null && t.name != "360_standard")
+        {
+            Destroy(t);
+        }
         skyboxTransform.GetComponent<Renderer>().material.mainTexture = www.texture;
+        Destroy(cached_skybox);
         cached_skybox = www.texture;
         fadeIn();
     }
@@ -204,6 +219,11 @@ public class Skybox : EventBehaviour {
                 GameObject.Find("Main Camera").GetComponent<ARCamera>().camera_fixed = false;
                 enableBuildings();
                 enablePois();
+                Texture t = skyboxTransform.GetComponent<Renderer>().material.mainTexture;
+                if (t != null && t.name != "360_standard")
+                {
+                    Destroy(t);
+                }
                 skyboxTransform.GetComponent<Renderer>().material.mainTexture = cached_skybox;
                 return false;
             }

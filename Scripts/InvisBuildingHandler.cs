@@ -42,6 +42,7 @@ public class InvisBuildingHandler : MonoBehaviour {
         for(int i = 0; i < del.Count; ++i) {
             GameObject b = del[i].gameObject;
             all_buildings.Remove(del[i]);
+            del[i].kill();
             DestroyImmediate(b, true);
         }
     }
