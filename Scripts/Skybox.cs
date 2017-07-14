@@ -24,7 +24,7 @@ public class Skybox :MonoBehaviour {
     {
         skyboxTransform = transform.Find("skybox");
         poiNameBarScript = GameObject.Find("POINameBar").GetComponent<PoiNameBarScript>();
-        billboardDetailScript = transform.Find("BillboardDetail").GetComponent<BillboardDetailScript>();
+        billboardDetailScript = GameObject.Find("BillboardDetail").GetComponent<BillboardDetailScript>();
         //GameObject.Find("event").GetComponent<EventpropagationHandler>().register(this);
     }
 	
