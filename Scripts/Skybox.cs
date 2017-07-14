@@ -156,7 +156,7 @@ public class Skybox : EventBehaviour {
             ib.gameObject.SetActive(true);
     }
 
-    public void showDistrict(string image)
+    public void showDistrict(string image, float offset)
     {
         isDistrict = true;
         if(skyboxTransform == null)
@@ -164,9 +164,9 @@ public class Skybox : EventBehaviour {
         //skyboxTransform.GetComponent<Renderer>().material.mainTextureScale = new Vector2(-1,-1);
         //skyboxTransform.GetComponent<Renderer>().material.mainTextureOffset = new Vector2(1, 1);
         //GameObject.Find("Main Camera").GetComponent<DialogueHandler>().showLoadingScreen("going to district");
+        skyboxTransform.GetComponent<Renderer>().material.mainTextureOffset = new Vector2(offset, 0);
         if (image.Equals("") || image == null)
         {
-
             Texture t = skyboxTransform.GetComponent<Renderer>().material.mainTexture;
             if(t!=null && t.name != "360_standard")
             {
