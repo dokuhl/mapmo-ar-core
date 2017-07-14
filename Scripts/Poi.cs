@@ -45,6 +45,10 @@ namespace Assets.Scripts
             DestroyImmediate(billboard,true);
             //DestroyImmediate(signboard, true);
             DestroyImmediate(marker.gameObject, true);
+            basic_poi = null;
+            detail_poi = null;
+            map = null;
+            marker = null;
             DestroyImmediate(this, true);
         }
 

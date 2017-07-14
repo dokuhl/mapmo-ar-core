@@ -16,6 +16,7 @@ public class DistrictArrowJsonResponse_DistrictArrow : IComparable<DistrictArrow
     private float bearing;
     public string original_name;
     public string skybox_image;
+    public float image_offset;
     public float lat;
     public float lon;
 

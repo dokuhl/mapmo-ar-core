@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class DistrictArrow : MonoBehaviour, IPointerClickHandler {
     public float lat;
@@ -11,6 +12,7 @@ public class DistrictArrow : MonoBehaviour, IPointerClickHandler {
     public string skybox_img;
     public float dist_to_game_center = 14.5f;
     public float dist_to_center = 0;
+    public float offset_x = 0;
     public float bearing;
     private new Transform transform;
     private Map map;
@@ -40,6 +42,7 @@ public class DistrictArrow : MonoBehaviour, IPointerClickHandler {
         this.lon = arrow.lon;
         this.district_name = arrow.original_name;
         this.skybox_img = arrow.skybox_image;
+        this.offset_x = arrow.image_offset;
         transform.FindChild("txt_district").GetComponent<TextMesh>().text = district_name;
         updatePos();
     }
@@ -74,6 +77,9 @@ public class DistrictArrow : MonoBehaviour, IPointerClickHandler {
         map.lat = this.lat;
         map.lon = this.lon;
         map.updateCenter();
-        GameObject.Find("skybox_container").GetComponent<Skybox>().showDistrict(this.skybox_img);
+
+        float offset = (360 + this.offset_x) / 360;
+        GameObject.Find("skybox_container").GetComponent<Skybox>().showDistrict(this.skybox_img, offset);
+        GameObject.Find("DistrictArrowHandler").GetComponent<DistrictArrowHandler>().enableDistrictArrowsCollider();
     }
 }

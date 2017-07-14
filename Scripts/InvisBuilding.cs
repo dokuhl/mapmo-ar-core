@@ -26,14 +26,15 @@ public class InvisBuilding : MonoBehaviour {
     Color unhighlight_color = new Color(0, 0, 0, 133f / 255f);
     // Use this for initialization
     void Start () {
-        // Create Vector2 vertices
-        Vector2[] vertices2D = new Vector2[] {
-            new Vector2(0,0),
-            new Vector2(8.34294589f,8.53140899f),
-            new Vector2(15.9759875f,1.06799749f),
-            new Vector2(7.63304161f,-7.46970621f)
-        };
-        
+               
+    }
+    public void kill()
+    {
+        DestroyImmediate(building_icon, true);
+        DestroyImmediate(poi_amount_icon, true);
+        poi_handler = null;
+        pois = null;
+        map = null;
     }
     public override bool Equals(System.Object obj)
     {
@@ -135,7 +136,7 @@ public class InvisBuilding : MonoBehaviour {
         b = (float)map.bearing(lat, lon);
         d = (float)map.dist(lat, lon) * 1000;
 
-        transform.position = new Vector3((x_off + d) * Mathf.Sin(Mathf.Deg2Rad * b), 0, (z_off + d) * Mathf.Cos(Mathf.Deg2Rad * b));
+        transform.position = new Vector3((d) * Mathf.Sin(Mathf.Deg2Rad * b), 0, (d) * Mathf.Cos(Mathf.Deg2Rad * b));
 
 
 
@@ -196,7 +197,6 @@ public class InvisBuilding : MonoBehaviour {
 
         x_off = x_off / (tris.Length / 3);
         z_off = z_off / (tris.Length / 3);
-
 
         int alternate = 0;
         for (int i = 0; i < poly.Length; i++)

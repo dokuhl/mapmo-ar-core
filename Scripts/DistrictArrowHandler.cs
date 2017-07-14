@@ -112,6 +112,27 @@ public class DistrictArrowHandler : MonoBehaviour {
 
     }
 
+    public void enableDistrictArrowsCollider()
+    {
+        for (int i = 0; i < district_arrows.Count; ++i)
+        {
+            //enable colliders
+            if (!district_arrows[i].GetComponent<Collider>().enabled)
+                district_arrows[i].GetComponent<Collider>().enabled = true;
+
+            //adapt opacity TODO
+        }
+    }
+    public void disableDistrictArrowsCollider()
+    {
+        for (int i = 0; i < district_arrows.Count; ++i)
+        {
+            //disable colliders for drag
+            if (district_arrows[i].GetComponent<Collider>().enabled)
+                district_arrows[i].GetComponent<Collider>().enabled = false;
+        }
+    }
+
 	// Update is called once per frame
 	void LateUpdate () {
         float α = Camera.main.transform.eulerAngles.x;
@@ -119,22 +140,10 @@ public class DistrictArrowHandler : MonoBehaviour {
         {
             if(α > 80f)
             {
-                for(int i = 0; i < district_arrows.Count; ++i)
-                {
-                    //disable colliders for drag
-                    if(district_arrows[i].GetComponent<Collider>().enabled)
-                        district_arrows[i].GetComponent<Collider>().enabled = false;
-                }
+                disableDistrictArrowsCollider();
             } else if(α < 75f && α > 65)
             {
-                for (int i = 0; i < district_arrows.Count; ++i)
-                {
-                    //enable colliders
-                    if(!district_arrows[i].GetComponent<Collider>().enabled)
-                        district_arrows[i].GetComponent<Collider>().enabled = true;
-
-                    //adapt opacity TODO
-                }
+                enableDistrictArrowsCollider();
             } else if(α >=75f && α < 80f)
             {
                 for (int i = 0; i < district_arrows.Count; ++i)

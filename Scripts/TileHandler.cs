@@ -159,11 +159,6 @@ public class TileHandler : MonoBehaviour, IPointerDownHandler, IPointerExitHandl
         //    }
         //}
 
-
-        
-
-
-
     }
 
     
@@ -216,13 +211,18 @@ public class TileHandler : MonoBehaviour, IPointerDownHandler, IPointerExitHandl
             GameObject t;
             tiles.TryGetValue(t_k, out t);
             TileScript ts = t.GetComponent<TileScript>();
-            if (ts.t_x > c_tx + destroy_r || ts.t_y > c_ty + destroy_r)
+            if (ts.t_x > c_tx + destroy_r || ts.t_y > c_ty + destroy_r || ts.t_x < c_tx - destroy_r || ts.t_y < c_ty - destroy_r)
                 dl.Add(t_k);
         }
         foreach (string t_k in dl)
         {
             GameObject t = tiles[t_k];
             tiles.Remove(t_k);
+            Texture texture = t.GetComponent<Renderer>().material.mainTexture;
+            if (texture != null)
+            {
+                Destroy(texture);
+            }
             DestroyImmediate(t, true);
         }
         moveTiles();
