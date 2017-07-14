@@ -30,7 +30,15 @@ public class PoiNameBarScript : MonoBehaviour {
 	void Update () {
 		
 	}
-
+    private void OnGUI()
+    {
+        Event e = Event.current;
+        if (e.type == EventType.KeyUp && e.keyCode == KeyCode.Escape && (expand_view.activeSelf))
+        {
+            e.Use();
+            minimize();
+        }
+    }
     public void hide()
     {
         minimize_view.SetActive(false);
@@ -66,10 +74,14 @@ public class PoiNameBarScript : MonoBehaviour {
         highlight();
         if(pois.Count > 1)
             min_poi_title.text = pois[0].basic_poi.original_name + " (+" + (pois.Count-1) + " others)";
-        else
+        else if(pois.Count == 1)
             min_poi_title.text = pois[0].basic_poi.original_name;
-        min_poi = pois[0];
-        min_poi_image.sprite = icon(pois[0].basic_poi.icon);
+
+        if (pois.Count >= 1)
+        {
+            min_poi = pois[0];
+            min_poi_image.sprite = icon(pois[0].basic_poi.icon);
+        }
 
         if (pois.Count == 0)
         {

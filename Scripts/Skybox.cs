@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Assets.Scripts;
+using UnityEngine.EventSystems;
 
-public class Skybox : EventBehaviour {
+public class Skybox :MonoBehaviour {
 
     public float scale = 45000f;
     public float upper_scale = 45000f;
@@ -16,11 +17,16 @@ public class Skybox : EventBehaviour {
     public string district_image = "";
     Texture2D cached_skybox;
     private Transform skyboxTransform;
-	void Start ()
+    private Texture2D default_skybox;
+    private PoiNameBarScript poiNameBarScript;
+    private BillboardDetailScript billboardDetailScript;
+    void Start ()
     {
         skyboxTransform = transform.Find("skybox");
+        poiNameBarScript = GameObject.Find("POINameBar").GetComponent<PoiNameBarScript>();
+        billboardDetailScript = transform.Find("BillboardDetail").GetComponent<BillboardDetailScript>();
         //GameObject.Find("event").GetComponent<EventpropagationHandler>().register(this);
-	}
+    }
 	
 	void Update () {
 
@@ -155,7 +161,7 @@ public class Skybox : EventBehaviour {
             ib.gameObject.SetActive(true);
     }
 
-    public void showDistrict(string image)
+    public void showDistrict(string image, float offset)
     {
         isDistrict = true;
         if(skyboxTransform == null)
@@ -163,10 +169,18 @@ public class Skybox : EventBehaviour {
         //skyboxTransform.GetComponent<Renderer>().material.mainTextureScale = new Vector2(-1,-1);
         //skyboxTransform.GetComponent<Renderer>().material.mainTextureOffset = new Vector2(1, 1);
         //GameObject.Find("Main Camera").GetComponent<DialogueHandler>().showLoadingScreen("going to district");
+        skyboxTransform.GetComponent<Renderer>().material.mainTextureOffset = new Vector2(offset, 0);
         if (image.Equals("") || image == null)
         {
+            Texture t = skyboxTransform.GetComponent<Renderer>().material.mainTexture;
+            if(t!=null && t.name != "360_standard")
+            {
+                Destroy(t);
+            }
             //standard image
-            skyboxTransform.GetComponent<Renderer>().material.mainTexture = Resources.Load("Textures/360_standard", typeof(Texture2D)) as Texture2D;
+            if (default_skybox == null)
+                default_skybox = Resources.Load("Textures/360_standard", typeof(Texture2D)) as Texture2D;
+            skyboxTransform.GetComponent<Renderer>().material.mainTexture = default_skybox;
             fadeIn();
         }
         else
@@ -183,15 +197,21 @@ public class Skybox : EventBehaviour {
         WWW www = new WWW(image);
         yield return www;
         GameObject.Find("Main Camera").GetComponent<ARCamera>().camera_fixed = false;
+        Texture t = skyboxTransform.GetComponent<Renderer>().material.mainTexture;
+        if (t != null && t.name != "360_standard")
+        {
+            Destroy(t);
+        }
         skyboxTransform.GetComponent<Renderer>().material.mainTexture = www.texture;
+        Destroy(cached_skybox);
         cached_skybox = www.texture;
         fadeIn();
     }
 
-    public override bool OnEvent(Event e)
+    void OnGUI()
     {
-        
-        if(e.type == EventType.KeyUp && e.keyCode == KeyCode.Escape && (isDistrict || isInside))
+        Event e = Event.current;
+        if (e.type == EventType.KeyUp && e.keyCode == KeyCode.Escape && (isDistrict || isInside) && !poiNameBarScript.expand_view.activeSelf && !billboardDetailScript.content.activeSelf)
         {
             e.Use();
             Debug.Log("ESCAPE");
@@ -204,14 +224,19 @@ public class Skybox : EventBehaviour {
                 GameObject.Find("Main Camera").GetComponent<ARCamera>().camera_fixed = false;
                 enableBuildings();
                 enablePois();
+                Texture t = skyboxTransform.GetComponent<Renderer>().material.mainTexture;
+                if (t != null && t.name != "360_standard")
+                {
+                    Destroy(t);
+                }
                 skyboxTransform.GetComponent<Renderer>().material.mainTexture = cached_skybox;
-                return false;
+                //return false;
             }
             else if(isDistrict && !isInside)
             {
                 isDistrict = false;
                 Debug.Log("returning");
-                GameObject.Find("Main Camera/CameraFeed").GetComponent<ar_back_plane>().WebCamPlay();
+                //GameObject.Find("Main Camera/CameraFeed").GetComponent<ar_back_plane>().WebCamPlay();
                 GameObject.Find("Main Camera").GetComponent<DialogueHandler>().showLoadingScreen("returning to position");
                 GameObject.Find("Main Camera").GetComponent<ARCamera>().camera_fixed = false;
                 Map map = GameObject.Find("Map").GetComponent<Map>();
@@ -222,7 +247,7 @@ public class Skybox : EventBehaviour {
                 map.updateCenter();
                 map.gps_fixed = false;
                 fadeOut();
-                return false;
+               // return false;
             } else if(!isDistrict && isInside)
             {
                 //skyboxTransform.GetComponent<MediaPlayerCtrl>().m_strFileName = "";
@@ -235,11 +260,11 @@ public class Skybox : EventBehaviour {
                 GameObject.Find("Main Camera").GetComponent<DialogueHandler>().showLoadingScreen("returning to position");
                 GameObject.Find("Main Camera").GetComponent<ARCamera>().camera_fixed = false;
                 
-                return false;
+                //return false;
             }
 
             
         }
-        return true;
+        //return true;
     }
 }
