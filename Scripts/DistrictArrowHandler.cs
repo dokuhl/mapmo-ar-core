@@ -59,11 +59,11 @@ public class DistrictArrowHandler : MonoBehaviour {
                     del.Add(district_arrows[j]);
                     continue;
                 }
-                if (district_arrows[j].GetComponent<DistrictArrow>().dist_to_center <= district_arrows_loaded[i].getDistToCenter() && Mathf.Abs(district_arrows_loaded[i].getBearing() - district_arrows[j].GetComponent<DistrictArrow>().bearing) < 45 || district_arrows_loaded[i].original_name.Equals(district_arrows[j].GetComponent<DistrictArrow>().district_name))
+                if (district_arrows[j].GetComponent<DistrictArrow>().dist_to_center <= district_arrows_loaded[i].getDistToCenter() && Mathf.Abs(district_arrows_loaded[i].getBearing() - district_arrows[j].GetComponent<DistrictArrow>().bearing) < 25 || district_arrows_loaded[i].original_name.Equals(district_arrows[j].GetComponent<DistrictArrow>().district_name))
                 {
                     create = false;
                 }
-                else if (district_arrows[j].GetComponent<DistrictArrow>().dist_to_center > district_arrows_loaded[i].getDistToCenter() && Mathf.Abs(district_arrows_loaded[i].getBearing() - district_arrows[j].GetComponent<DistrictArrow>().bearing) < 45)
+                else if (district_arrows[j].GetComponent<DistrictArrow>().dist_to_center > district_arrows_loaded[i].getDistToCenter() && Mathf.Abs(district_arrows_loaded[i].getBearing() - district_arrows[j].GetComponent<DistrictArrow>().bearing) < 25)
                 {
                     del.Add(district_arrows[j]);
                 }
@@ -135,23 +135,23 @@ public class DistrictArrowHandler : MonoBehaviour {
 
 	// Update is called once per frame
 	void LateUpdate () {
-        float α = Camera.main.transform.eulerAngles.x;
-        if(α > 65f)
-        {
-            if(α > 80f)
-            {
-                disableDistrictArrowsCollider();
-            } else if(α < 75f && α > 65)
-            {
-                enableDistrictArrowsCollider();
-            } else if(α >=75f && α < 80f)
-            {
-                for (int i = 0; i < district_arrows.Count; ++i)
-                {
+        //float α = Camera.main.transform.eulerAngles.x;
+        //if(α > 65f)
+        //{
+        //    if(α > 80f)
+        //    {
+        //        disableDistrictArrowsCollider();
+        //    } else if(α < 75f && α > 65)
+        //    {
+        //        enableDistrictArrowsCollider();
+        //    } else if(α >=75f && α < 80f)
+        //    {
+        //        for (int i = 0; i < district_arrows.Count; ++i)
+        //        {
                     
-                    //adapt opacity TODO
-                }
-            }
-        }
+        //            //adapt opacity TODO
+        //        }
+        //    }
+        //}
 	}
 }

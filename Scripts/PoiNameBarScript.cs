@@ -14,6 +14,7 @@ public class PoiNameBarScript : MonoBehaviour {
     public GameObject minimize_view;
     public GameObject list_container;
     public ARCamera camera_script;
+    private bool camera_fixed_before_expanding;
     public PoiHandler poi_handler_script;
     public Texture2D default_tex;
     public Map map;
@@ -147,8 +148,8 @@ public class PoiNameBarScript : MonoBehaviour {
             openPoi(0);
             return;
         }
-            
 
+        camera_fixed_before_expanding = camera_script.camera_fixed;
         camera_script.camera_fixed = true;
         NatCamProjectController.getInstance().Pause();
          
@@ -175,7 +176,7 @@ public class PoiNameBarScript : MonoBehaviour {
 
     public void minimize()
     {
-        camera_script.camera_fixed = false;
+        camera_script.camera_fixed = camera_fixed_before_expanding;
 
         NatCamProjectController.getInstance().Play();
         for (int i = 0; i < list_items.Count; ++i)

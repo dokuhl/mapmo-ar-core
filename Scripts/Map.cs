@@ -177,10 +177,10 @@ public class Map : MonoBehaviour {
         district_arrow_handler_script = district_arrow_handler.GetComponent<DistrictArrowHandler>();
         ////hardcoded latlon + updateCenter once
         tile_handler = GameObject.Find("MapBackground/TileHandler").GetComponent<TileHandler>();
-        
-        //lat = 51.053705;
-        //lon = 13.735841;
-        //GameObject.Find("skybox_container").GetComponent<Skybox>().showDistrict("http://mapmo.de/wp-content/uploads/Theaterplatz.jpg", 0.965f);
+
+        lat = 51.053705;
+        lon = 13.735841;
+        GameObject.Find("skybox_container").GetComponent<Skybox>().showDistrict("http://mapmo.de/wp-content/uploads/Theaterplatz.jpg", 0.965f);
 
         ////lat = 51.0291588;
         ////lon = 13.7194578;

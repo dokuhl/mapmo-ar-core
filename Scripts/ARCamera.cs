@@ -75,11 +75,15 @@ public class ARCamera : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             Transform objectHit = hit.transform;
-
             if (objectHit.name.Contains("fade_building"))
             {
                 if (poi_name_bar_script.polygon_id != objectHit.GetComponent<InvisBuilding>().id)
                     poi_name_bar_script.switchBuilding(objectHit.GetComponent<InvisBuilding>());
+            }
+            else if (objectHit.name.Contains("building_icon"))
+            {
+                if (poi_name_bar_script.polygon_id != objectHit.parent.GetComponent<InvisBuilding>().id)
+                    poi_name_bar_script.switchBuilding(objectHit.parent.GetComponent<InvisBuilding>());
             }
             else
                 poi_name_bar_script.disableView();

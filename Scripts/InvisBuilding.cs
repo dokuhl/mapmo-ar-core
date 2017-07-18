@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Assets;
 using Assets.Scripts;
+using UnityEngine.EventSystems;
 
 public class InvisBuilding : MonoBehaviour {
 
@@ -257,9 +258,10 @@ public class InvisBuilding : MonoBehaviour {
         myMC.sharedMesh = newMesh;
         return m;
     }
+    
 
     // Update is called once per frame
     void Update () {
         
-    }
+    }   
 }
