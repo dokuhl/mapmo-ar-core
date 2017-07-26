@@ -73,7 +73,7 @@ public class PoiHandler : MonoBehaviour {
 
     IEnumerator loadPoisCall(double lat_last, double lon_last)
     {
-        WWW www = new WWW(base_url + "lat=" + map.lat + "&lon=" + map.lon+"&lat_last="+lat_last+"&lon_last="+lon_last);
+        WWW www = new WWW(base_url + "lat=" + map.lat + "&lon=" + map.lon);// +"&lat_last="+lat_last+"&lon_last="+lon_last);
         yield return www;
         yield return new WaitForSeconds(0.5f);
         //string ret  = "{\"response\":[{\"id\" : 384746, \"original_name\" : \"Nikolaikirche\", \"bv_image\" : \"https://scontent-frt3-1.cdninstagram.com/t51.2885-15/e35/15538982_397954337262951_6855562085602951168_n.jpg\", \"icon\" : \"glyphicons-303-temple-christianity-church@3x\", \"super_categories\" : [111494], \"bearing\" : 79.8900000000000006, \"elevation\" : 106.32283, \"pos_lat\" : 50.1100489999999965, \"pos_lon\" : 8.68232300000000023}]}";

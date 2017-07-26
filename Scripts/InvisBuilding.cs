@@ -160,6 +160,7 @@ public class InvisBuilding : MonoBehaviour {
                     min_d = hit.point.magnitude;
             }
         }
+        switchIconVisibility();
         if (min_d < p.magnitude)
         {
             
@@ -167,7 +168,6 @@ public class InvisBuilding : MonoBehaviour {
             switchIconVisibility();
             return;
         }
-        switchIconVisibility();
 
         building_icon.transform.position = new Vector3(p.x + ((building_icon_width / 1) * s * p.magnitude) * -p.normalized.x, 1, p.z + ((building_icon_width / 1) * s * p.magnitude) * -p.normalized.z);
         

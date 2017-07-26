@@ -178,9 +178,9 @@ public class Map : MonoBehaviour {
         ////hardcoded latlon + updateCenter once
         tile_handler = GameObject.Find("MapBackground/TileHandler").GetComponent<TileHandler>();
 
-        lat = 51.053705;
-        lon = 13.735841;
-        GameObject.Find("skybox_container").GetComponent<Skybox>().showDistrict("http://mapmo.de/wp-content/uploads/Theaterplatz.jpg", 0.965f);
+        lat = 51.049456;
+        lon = 13.737441;
+        GameObject.Find("skybox_container").GetComponent<Skybox>().showDistrict("http://mapmo.de/wp-content/uploads/R0010189_20170721150835.jpg", 1.845f);
 
         ////lat = 51.0291588;
         ////lon = 13.7194578;

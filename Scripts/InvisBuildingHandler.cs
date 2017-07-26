@@ -64,7 +64,7 @@ public class InvisBuildingHandler : MonoBehaviour {
 
     IEnumerator loadBuildingsCall(double lat_last, double lon_last)
     {
-        WWW www = new WWW(base_url + "lat=" + map.lat + "&lon=" + map.lon + "&lat_last=" + lat_last + "&lon_last=" + lon_last);
+        WWW www = new WWW(base_url + "lat=" + map.lat + "&lon=" + map.lon);// + "&lat_last=" + lat_last + "&lon_last=" + lon_last);
         yield return www;
         assignNewBuildings(www.text);
     }

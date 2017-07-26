@@ -23,10 +23,11 @@ public class SkyboxDrag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (dragging || (Mathf.Abs(eulerAngles(eventData.pointerCurrentRaycast.worldPosition, drag_from).x) + Mathf.Abs(eulerAngles(eventData.pointerCurrentRaycast.worldPosition, drag_from).z)) / 2 > min_drag_angle)
-        {
-            
-            dragging = true;
+        //if (dragging || (Mathf.Abs(eulerAngles(eventData.pointerCurrentRaycast.worldPosition, drag_from).x) + Mathf.Abs(eulerAngles(eventData.pointerCurrentRaycast.worldPosition, drag_from).y)) / 2 > min_drag_angle)
+        if (dragging || (Mathf.Abs(eventData.delta.x) + Mathf.Abs(eventData.delta.y)) / 2 > min_drag_angle)
+            {
+
+                dragging = true;
             maincamera.GetComponent<ARCamera>().camera_fixed = true;
 
 
@@ -36,10 +37,10 @@ public class SkyboxDrag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
             //}
             //Vector3 drag = eulerAngles(eventData.pointerCurrentRaycast.worldPosition, drag_from);
             //Debug.Log(drag);
-            //drag_from = eventData.pointerCurrentRaycast.worldPosition;
             maincamera.GetComponent<ARCamera>().rotateByDrag(new Vector3(speedV*eventData.delta.y, -speedH*eventData.delta.x, 0));
-            
+
         }
+        drag_from = eventData.pointerCurrentRaycast.worldPosition;
     }
 
     public void OnEndDrag(PointerEventData eventData)

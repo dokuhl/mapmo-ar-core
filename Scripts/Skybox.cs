@@ -15,7 +15,7 @@ public class Skybox :MonoBehaviour {
     public bool isDistrict = false;
     public bool isInside = false;
     public string district_image = "";
-    Texture2D cached_skybox;
+    string cached_skybox;
     private Transform skyboxTransform;
     private Texture2D default_skybox;
     private PoiNameBarScript poiNameBarScript;
@@ -175,7 +175,7 @@ public class Skybox :MonoBehaviour {
             Texture t = skyboxTransform.GetComponent<Renderer>().material.mainTexture;
             if(t!=null && t.name != "360_standard")
             {
-                Destroy(t);
+                Destroy(t,0);
             }
             //standard image
             if (default_skybox == null)
@@ -200,11 +200,10 @@ public class Skybox :MonoBehaviour {
         Texture t = skyboxTransform.GetComponent<Renderer>().material.mainTexture;
         if (t != null && t.name != "360_standard")
         {
-            Destroy(t);
+            Destroy(t,0);
         }
         skyboxTransform.GetComponent<Renderer>().material.mainTexture = www.texture;
-        Destroy(cached_skybox);
-        cached_skybox = www.texture;
+        cached_skybox = image;
         fadeIn();
     }
 
@@ -220,16 +219,16 @@ public class Skybox :MonoBehaviour {
                 //skyboxTransform.GetComponent<MediaPlayerCtrl>().m_strFileName = "";
                 loadImg(district_image);
                 isInside = false;
-                GameObject.Find("Main Camera").GetComponent<DialogueHandler>().showLoadingScreen("returning to district");
+                //GameObject.Find("Main Camera").GetComponent<DialogueHandler>().showLoadingScreen("returning to district");
                 GameObject.Find("Main Camera").GetComponent<ARCamera>().camera_fixed = false;
                 enableBuildings();
-                enablePois();
+                //enablePois();
                 Texture t = skyboxTransform.GetComponent<Renderer>().material.mainTexture;
                 if (t != null && t.name != "360_standard")
                 {
                     Destroy(t);
                 }
-                skyboxTransform.GetComponent<Renderer>().material.mainTexture = cached_skybox;
+                //skyboxTransform.GetComponent<Renderer>().material.mainTexture = cached_skybox;
                 //return false;
             }
             else if(isDistrict && !isInside)

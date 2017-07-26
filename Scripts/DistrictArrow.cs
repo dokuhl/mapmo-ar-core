@@ -51,7 +51,7 @@ public class DistrictArrow : MonoBehaviour, IPointerClickHandler {
     {
         bearing = (float)map.bearing(lat, lon);
         dist_to_center = (float)map.dist(lat, lon);
-        transform.position = new Vector3(Mathf.Sin(Mathf.Deg2Rad * bearing) * dist_to_game_center, -10f , Mathf.Cos(Mathf.Deg2Rad * bearing) * dist_to_game_center);
+        transform.position = new Vector3(Mathf.Sin(Mathf.Deg2Rad * bearing) * dist_to_game_center, 0.7f , Mathf.Cos(Mathf.Deg2Rad * bearing) * dist_to_game_center);
         transform.eulerAngles = new Vector3(0, bearing+180, 0);//new Quaternion(0, 0, 0, 0);
         //transform.Rotate(Vector3.up, bearing + 180);
         transform.FindChild("txt_distance").GetComponent<TextMesh>().text =  Mathf.Round(dist_to_center * 1000) + "m";
