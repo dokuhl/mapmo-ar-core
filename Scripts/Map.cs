@@ -1,11 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DeadMosquito.AndroidGoodies;
-using System.Globalization;
 using System;
 using Assets.Scripts;
-using System.Text;
 
 public class Map : MonoBehaviour {
 
@@ -26,7 +23,7 @@ public class Map : MonoBehaviour {
     public GameObject poi_handler;
     public PoiHandler poi_handler_script;
     public GameObject routing_handler;
-    public RoutingHandler routing_handler_script;
+    //public RoutingHandler routing_handler_script;
     public GameObject district_arrow_handler;
     public DistrictArrowHandler district_arrow_handler_script;
     private List<Poi> pois;
@@ -214,14 +211,6 @@ public class Map : MonoBehaviour {
         coords.Add(new float[] { 51.0535469055176f, 13.735987663269f });
         coords.Add(new float[] { 51.054095f, 13.735120f });
         coords.Add(new float[] { 51.053915f, 13.737164f });
-        //coords.Add(new float[] { 51.0291588f, 13.7194578f });
-        //coords.Add(new float[] { 51.029146f, 13.719710f });
-        //coords.Add(new float[] { 51.030064f, 13.722311f });
-        //coords.Add(new float[] { 51.030856f, 13.721901f });
-        //coords.Add(new float[] { 51.031621f, 13.722726f });
-        //coords.Add(new float[] { 51.032265f, 13.721333f });
-        //coords.Add(new float[] { 51.033459f, 13.722658f });
-        //coords.Add(new float[] { 51.034063f, 13.723366f });
         if (!fakeGPSrunning)
             StartCoroutine(fakeGPSCoroutine(coords));
     }
@@ -254,9 +243,6 @@ public class Map : MonoBehaviour {
         }
 
 
-
-
-
         building_handler_script.updateBuildings();
         poi_handler_script.updatePois();
         district_arrow_handler_script.updateData();
@@ -277,21 +263,21 @@ public class Map : MonoBehaviour {
         
     }
 
-    IEnumerator getUserElevation()
-    {
+    //IEnumerator getUserElevation()
+    //{
 
-        WWWForm wwwForm = new WWWForm();
-        string data = "{\"type\": \"Point\",\"coordinates\": [" + this.lon + "," + this.lat + "]}";
+    //    WWWForm wwwForm = new WWWForm();
+    //    string data = "{\"type\": \"Point\",\"coordinates\": [" + this.lon + "," + this.lat + "]}";
 
-        Dictionary<string,string> headers = new Dictionary<string, string>();
-        headers.Add("Content-Type", "application/json");
-        WWW www = new WWW("https://data.cykelbanor.se/elevation/geojson", Encoding.ASCII.GetBytes(data),headers);
-        yield return www;
+    //    Dictionary<string,string> headers = new Dictionary<string, string>();
+    //    headers.Add("Content-Type", "application/json");
+    //    WWW www = new WWW("https://data.cykelbanor.se/elevation/geojson", Encoding.ASCII.GetBytes(data),headers);
+    //    yield return www;
 
-        ElevationJsonResponse res = JsonUtility.FromJson<ElevationJsonResponse>(www.text);
-        if(res.coordinates!=null && res.coordinates.Length>0)
-            this.elevation = res.coordinates[2];
-    }
+    //    ElevationJsonResponse res = JsonUtility.FromJson<ElevationJsonResponse>(www.text);
+    //    if(res.coordinates!=null && res.coordinates.Length>0)
+    //        this.elevation = res.coordinates[2];
+    //}
 
 
 
@@ -349,8 +335,8 @@ public class Map : MonoBehaviour {
 		
 	}
 }
-class ElevationJsonResponse
-{
-    public string type;
-    public double[] coordinates;
-}
+//class ElevationJsonResponse
+//{
+//    public string type;
+//    public double[] coordinates;
+//}

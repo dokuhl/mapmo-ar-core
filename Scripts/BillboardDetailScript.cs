@@ -129,10 +129,10 @@ public class BillboardDetailScript : EventBehaviour
         else
             main_view_script.txt_description.text = p.description;
 
-        mainview.transform.Find("listview").GetComponent<ScrollSnapRect>().width = width;
-        mainview.transform.Find("listview").GetComponent<ScrollSnapRect>().padding_right = padding_right;
-        mainview.transform.Find("listview").GetComponent<ScrollSnapRect>()._container = _container.GetComponent<RectTransform>();
-        mainview.transform.Find("listview").GetComponent<ScrollSnapRect>().index = viewcount;
+        //mainview.transform.Find("listview").GetComponent<ScrollSnapRect>().width = width;
+        //mainview.transform.Find("listview").GetComponent<ScrollSnapRect>().padding_right = padding_right;
+        //mainview.transform.Find("listview").GetComponent<ScrollSnapRect>()._container = _container.GetComponent<RectTransform>();
+        //mainview.transform.Find("listview").GetComponent<ScrollSnapRect>().index = viewcount;
 
         if (poi.basic_poi.fan_count > 0)
             mainview.transform.Find("listview/viewport/content/social_buttons/like/txt").GetComponent<UnityEngine.UI.Text>().text = poi.basic_poi.fan_count + " Likes";
@@ -178,107 +178,107 @@ public class BillboardDetailScript : EventBehaviour
         }
 
 
-        if (p.items.Length > 0)
-        {
+        //if (p.items.Length > 0)
+        //{
 
-            mainview.transform.Find("listview/viewport/content/txt_toc").GetComponent<UnityEngine.UI.Text>().text = "Offers";
-            //viewcount++;
-            itemviews = new GameObject[p.items.Length];
-
-
-            for (int i = 0; i < p.items.Length; ++i)
-            {
-                GameObject btn = Instantiate(Resources.Load("tocbutton"), new Vector3(0, -15, 0), Quaternion.identity) as GameObject;
-                btn.GetComponent<TOCButton>().init(viewcount, _container.GetComponent<RectTransform>(), width, padding_right);
-                btn.transform.Find("txt_btn").GetComponent<Text>().text = p.items[i].name;
-                btn.GetComponent<Image>().color = billboardColor;
-                btn.transform.SetParent(mainview.transform.Find("listview/viewport/content"), false);
-
-                itemviews[i] = Instantiate(Resources.Load("itemview"), new Vector3(0, -15, 0), Quaternion.identity) as GameObject;
-                itemviews[i].transform.SetParent(_container.transform);
-                itemviews[i].transform.localScale = new Vector3(1, 1, 1);
-                itemviews[i].transform.localEulerAngles = new Vector3(0, 0, 0);
-                itemviews[i].GetComponent<RectTransform>().localPosition = new Vector3(viewcount * (width + padding_right), 0, 0.05f);
-                itemviews[i].transform.Find("txt_category").GetComponent<UnityEngine.UI.Text>().text = p.items[i].name;
-                itemviews[i].transform.Find("listview").GetComponent<ScrollSnapRect>().width = width;
-                itemviews[i].transform.Find("listview").GetComponent<ScrollSnapRect>()._container = _container.GetComponent<RectTransform>();
-                itemviews[i].transform.Find("listview").GetComponent<ScrollSnapRect>().padding_right = padding_right;
-                itemviews[i].transform.Find("listview").GetComponent<ScrollSnapRect>().index = viewcount;
+        //    mainview.transform.Find("listview/viewport/content/txt_toc").GetComponent<UnityEngine.UI.Text>().text = "Offers";
+        //    //viewcount++;
+        //    itemviews = new GameObject[p.items.Length];
 
 
-                for (int j = 0; j < p.items[i].values.Length; ++j)
-                {
-                    if (p.items[i].values[j].is_special)
-                    {
-                        GameObject prod = null;
-                        prod = Instantiate(Resources.Load("product"), new Vector3(0, -15, 0), Quaternion.identity) as GameObject;
+        //    for (int i = 0; i < p.items.Length; ++i)
+        //    {
+        //        GameObject btn = Instantiate(Resources.Load("tocbutton"), new Vector3(0, -15, 0), Quaternion.identity) as GameObject;
+        //        btn.GetComponent<TOCButton>().init(viewcount, _container.GetComponent<RectTransform>(), width, padding_right);
+        //        btn.transform.Find("txt_btn").GetComponent<Text>().text = p.items[i].name;
+        //        btn.GetComponent<Image>().color = billboardColor;
+        //        btn.transform.SetParent(mainview.transform.Find("listview/viewport/content"), false);
 
-                        prod.transform.Find("hlayout/txt_title").gameObject.GetComponent<Text>().text = p.items[i].values[j].name;
-                        if (p.items[i].values[j].price != 0)
-                            prod.transform.Find("hlayout/txt_price").gameObject.GetComponent<Text>().text = p.items[i].values[j].price + " €";
-                        if (p.items[i].values[j].date_from != null && !p.items[i].values[j].date_from.Equals(""))
-                        {
-                            prod.transform.Find("date_layout").gameObject.SetActive(true);
-                            System.DateTime date_from = new System.DateTime(0), date_to = new System.DateTime(0);
-
-                            date_from = System.DateTime.Parse(p.items[i].values[j].date_from);
-                            if (p.items[i].values[j].date_to != null && !p.items[i].values[j].date_to.Equals(""))
-                                date_to = System.DateTime.Parse(p.items[i].values[j].date_to);
-                            prod.transform.Find("date_layout/txt_time").gameObject.GetComponent<Text>().text = date_from.ToShortDateString() + " " + date_from.ToShortTimeString();
-                            if (date_to.Subtract(new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc)).TotalMilliseconds != 0 && !date_from.Equals(date_to) && date_to.Subtract(date_from).Milliseconds > 60000)
-                            {
-                                if (date_from.DayOfYear.Equals(date_to.DayOfYear))
-                                    prod.transform.Find("date_layout/txt_time").gameObject.GetComponent<Text>().text += " - " + date_to.ToShortTimeString();
-                                else
-                                    prod.transform.Find("date_layout/txt_time").gameObject.GetComponent<Text>().text += " - " + date_to.ToShortDateString() + " " + date_to.ToShortTimeString();
-                            }
-                        }
-                        prod.transform.SetParent(mainview.transform.Find("listview/viewport/content"), false);
-                    }
+        //        itemviews[i] = Instantiate(Resources.Load("itemview"), new Vector3(0, -15, 0), Quaternion.identity) as GameObject;
+        //        itemviews[i].transform.SetParent(_container.transform);
+        //        itemviews[i].transform.localScale = new Vector3(1, 1, 1);
+        //        itemviews[i].transform.localEulerAngles = new Vector3(0, 0, 0);
+        //        itemviews[i].GetComponent<RectTransform>().localPosition = new Vector3(viewcount * (width + padding_right), 0, 0.05f);
+        //        itemviews[i].transform.Find("txt_category").GetComponent<UnityEngine.UI.Text>().text = p.items[i].name;
+        //        //itemviews[i].transform.Find("listview").GetComponent<ScrollSnapRect>().width = width;
+        //        //itemviews[i].transform.Find("listview").GetComponent<ScrollSnapRect>()._container = _container.GetComponent<RectTransform>();
+        //        //itemviews[i].transform.Find("listview").GetComponent<ScrollSnapRect>().padding_right = padding_right;
+        //        //itemviews[i].transform.Find("listview").GetComponent<ScrollSnapRect>().index = viewcount;
 
 
-                    GameObject prod2 = null;
-                    prod2 = Instantiate(Resources.Load("product"), new Vector3(0, -15, 0), Quaternion.identity) as GameObject;
-                    if (p.items[i].values[j].product_cover != null && !p.items[i].values[j].product_cover.Equals("") && !p.items[i].values[j].product_cover.Equals("NULL"))
-                    {
-                        prod2.transform.Find("cover_layout").gameObject.SetActive(true);
-                        prod2.transform.Find("cover_layout/text/caption/txt_title").gameObject.GetComponent<Text>().text = p.items[i].values[j].name;
-                        if (p.items[i].values[j].price != 0)
-                            prod2.transform.Find("cover_layout/text/caption/txt_price").gameObject.GetComponent<Text>().text = p.items[i].values[j].price + " €";
-                        prod2.transform.Find("cover_layout/text/txt_description").gameObject.GetComponent<Text>().text = p.items[i].values[j].description;
-                        StartCoroutine(loadProductImage(p.items[i].values[j].product_cover, prod2.transform.Find("cover_layout/img_cover").gameObject.GetComponent<Image>()));
-                    }
-                    else
-                    {
-                        prod2.transform.Find("hlayout").gameObject.SetActive(true);
-                        prod2.transform.Find("hlayout/txt_title").gameObject.GetComponent<Text>().text = p.items[i].values[j].name;
-                        if (p.items[i].values[j].price != 0)
-                            prod2.transform.Find("hlayout/txt_price").gameObject.GetComponent<Text>().text = p.items[i].values[j].price + " €";
-                        if (p.items[i].values[j].date_from != null && !p.items[i].values[j].date_from.Equals(""))
-                        {
-                            prod2.transform.Find("date_layout").gameObject.SetActive(true);
-                            System.DateTime date_from = new System.DateTime(0), date_to = new System.DateTime(0);
+        //        for (int j = 0; j < p.items[i].values.Length; ++j)
+        //        {
+        //            if (p.items[i].values[j].is_special)
+        //            {
+        //                GameObject prod = null;
+        //                prod = Instantiate(Resources.Load("product"), new Vector3(0, -15, 0), Quaternion.identity) as GameObject;
 
-                            date_from = System.DateTime.Parse(p.items[i].values[j].date_from);
-                            if (p.items[i].values[j].date_to != null && !p.items[i].values[j].date_to.Equals(""))
-                                date_to = System.DateTime.Parse(p.items[i].values[j].date_to);
-                            prod2.transform.Find("date_layout/txt_time").gameObject.GetComponent<Text>().text = date_from.ToShortDateString() + " " + date_from.ToShortTimeString();
-                            if (date_to.Subtract(new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc)).TotalMilliseconds != 0 && !date_from.Equals(date_to) && date_to.Subtract(date_from).Milliseconds > 60000)
-                            {
-                                if (date_from.DayOfYear.Equals(date_to.DayOfYear))
-                                    prod2.transform.Find("date_layout/txt_time").gameObject.GetComponent<Text>().text += " - " + date_to.ToShortTimeString();
-                                else
-                                    prod2.transform.Find("date_layout/txt_time").gameObject.GetComponent<Text>().text += " - " + date_to.ToShortDateString() + " " + date_to.ToShortTimeString();
-                            }
-                        }
-                    }
-                    prod2.transform.SetParent(itemviews[i].transform.Find("listview/viewport/content"), false);
-                }
+        //                prod.transform.Find("hlayout/txt_title").gameObject.GetComponent<Text>().text = p.items[i].values[j].name;
+        //                if (p.items[i].values[j].price != 0)
+        //                    prod.transform.Find("hlayout/txt_price").gameObject.GetComponent<Text>().text = p.items[i].values[j].price + " €";
+        //                if (p.items[i].values[j].date_from != null && !p.items[i].values[j].date_from.Equals(""))
+        //                {
+        //                    prod.transform.Find("date_layout").gameObject.SetActive(true);
+        //                    System.DateTime date_from = new System.DateTime(0), date_to = new System.DateTime(0);
 
-                viewcount++;
+        //                    date_from = System.DateTime.Parse(p.items[i].values[j].date_from);
+        //                    if (p.items[i].values[j].date_to != null && !p.items[i].values[j].date_to.Equals(""))
+        //                        date_to = System.DateTime.Parse(p.items[i].values[j].date_to);
+        //                    prod.transform.Find("date_layout/txt_time").gameObject.GetComponent<Text>().text = date_from.ToShortDateString() + " " + date_from.ToShortTimeString();
+        //                    if (date_to.Subtract(new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc)).TotalMilliseconds != 0 && !date_from.Equals(date_to) && date_to.Subtract(date_from).Milliseconds > 60000)
+        //                    {
+        //                        if (date_from.DayOfYear.Equals(date_to.DayOfYear))
+        //                            prod.transform.Find("date_layout/txt_time").gameObject.GetComponent<Text>().text += " - " + date_to.ToShortTimeString();
+        //                        else
+        //                            prod.transform.Find("date_layout/txt_time").gameObject.GetComponent<Text>().text += " - " + date_to.ToShortDateString() + " " + date_to.ToShortTimeString();
+        //                    }
+        //                }
+        //                prod.transform.SetParent(mainview.transform.Find("listview/viewport/content"), false);
+        //            }
 
-            }
-        }
+
+        //            GameObject prod2 = null;
+        //            prod2 = Instantiate(Resources.Load("product"), new Vector3(0, -15, 0), Quaternion.identity) as GameObject;
+        //            if (p.items[i].values[j].product_cover != null && !p.items[i].values[j].product_cover.Equals("") && !p.items[i].values[j].product_cover.Equals("NULL"))
+        //            {
+        //                prod2.transform.Find("cover_layout").gameObject.SetActive(true);
+        //                prod2.transform.Find("cover_layout/text/caption/txt_title").gameObject.GetComponent<Text>().text = p.items[i].values[j].name;
+        //                if (p.items[i].values[j].price != 0)
+        //                    prod2.transform.Find("cover_layout/text/caption/txt_price").gameObject.GetComponent<Text>().text = p.items[i].values[j].price + " €";
+        //                prod2.transform.Find("cover_layout/text/txt_description").gameObject.GetComponent<Text>().text = p.items[i].values[j].description;
+        //                StartCoroutine(loadProductImage(p.items[i].values[j].product_cover, prod2.transform.Find("cover_layout/img_cover").gameObject.GetComponent<Image>()));
+        //            }
+        //            else
+        //            {
+        //                prod2.transform.Find("hlayout").gameObject.SetActive(true);
+        //                prod2.transform.Find("hlayout/txt_title").gameObject.GetComponent<Text>().text = p.items[i].values[j].name;
+        //                if (p.items[i].values[j].price != 0)
+        //                    prod2.transform.Find("hlayout/txt_price").gameObject.GetComponent<Text>().text = p.items[i].values[j].price + " €";
+        //                if (p.items[i].values[j].date_from != null && !p.items[i].values[j].date_from.Equals(""))
+        //                {
+        //                    prod2.transform.Find("date_layout").gameObject.SetActive(true);
+        //                    System.DateTime date_from = new System.DateTime(0), date_to = new System.DateTime(0);
+
+        //                    date_from = System.DateTime.Parse(p.items[i].values[j].date_from);
+        //                    if (p.items[i].values[j].date_to != null && !p.items[i].values[j].date_to.Equals(""))
+        //                        date_to = System.DateTime.Parse(p.items[i].values[j].date_to);
+        //                    prod2.transform.Find("date_layout/txt_time").gameObject.GetComponent<Text>().text = date_from.ToShortDateString() + " " + date_from.ToShortTimeString();
+        //                    if (date_to.Subtract(new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc)).TotalMilliseconds != 0 && !date_from.Equals(date_to) && date_to.Subtract(date_from).Milliseconds > 60000)
+        //                    {
+        //                        if (date_from.DayOfYear.Equals(date_to.DayOfYear))
+        //                            prod2.transform.Find("date_layout/txt_time").gameObject.GetComponent<Text>().text += " - " + date_to.ToShortTimeString();
+        //                        else
+        //                            prod2.transform.Find("date_layout/txt_time").gameObject.GetComponent<Text>().text += " - " + date_to.ToShortDateString() + " " + date_to.ToShortTimeString();
+        //                    }
+        //                }
+        //            }
+        //            prod2.transform.SetParent(itemviews[i].transform.Find("listview/viewport/content"), false);
+        //        }
+
+        //        viewcount++;
+
+        //    }
+        //}
     }
 
     IEnumerator loadDetail()

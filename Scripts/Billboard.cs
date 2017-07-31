@@ -63,8 +63,8 @@ public class Billboard : MonoBehaviour {
 
     public void navigate()
     {
-        GameObject.Find("RoutingHandler").GetComponent<RoutingHandler>().clearRoute();
-        GameObject.Find("RoutingHandler").GetComponent<RoutingHandler>().buildRoute((float)map.lat, (float)map.lon, (float)poi.lat, (float)poi.lon);
+        //GameObject.Find("RoutingHandler").GetComponent<RoutingHandler>().clearRoute();
+        //GameObject.Find("RoutingHandler").GetComponent<RoutingHandler>().buildRoute((float)map.lat, (float)map.lon, (float)poi.lat, (float)poi.lon);
         //switchAnimWorldCam();
     }
 

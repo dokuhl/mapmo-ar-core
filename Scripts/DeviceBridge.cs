@@ -87,14 +87,14 @@ public class DeviceBridge : MonoBehaviour {
         //string txt = unityPlayer.CallStatic<string>("testStatic");
 
     }
-    public void shareScreenshot(string na)
-    {
-        shareScreenshot();
-    }
-    public void shareScreenshot()
-    {
-        DeadMosquito.AndroidGoodies.AGShare.ShareScreenshot(true);
-    }
+    //public void shareScreenshot(string na)
+    //{
+    //    shareScreenshot();
+    //}
+    //public void shareScreenshot()
+    //{
+    //    DeadMosquito.AndroidGoodies.AGShare.ShareScreenshot(true);
+    //}
 
     public void HelloFromAndroid(string dataReceived)
     {

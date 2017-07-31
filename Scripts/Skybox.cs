@@ -253,7 +253,6 @@ public class Skybox :MonoBehaviour {
                 isInside = false;
                 enableBuildings();
                 enablePois();
-                GameObject.Find("Main Camera/CameraFeed").GetComponent<ar_back_plane>().WebCamPlay();
                 fadeOut();
                 
                 GameObject.Find("Main Camera").GetComponent<DialogueHandler>().showLoadingScreen("returning to position");

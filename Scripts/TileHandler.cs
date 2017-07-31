@@ -106,7 +106,7 @@ public class TileHandler : MonoBehaviour, IPointerDownHandler, IPointerExitHandl
     public void OnBeginDrag(PointerEventData eventData)
     {
         initial_pos = eventData.pointerCurrentRaycast.worldPosition;
-        navigateDialogue.GetComponent<NavigationDialogueScript>().hide();
+        //navigateDialogue.GetComponent<NavigationDialogueScript>().hide();
         goalMarker.gameObject.SetActive(false);
     }
 
@@ -126,9 +126,9 @@ public class TileHandler : MonoBehaviour, IPointerDownHandler, IPointerExitHandl
                 navigateDialogue.SetActive(true);
                 float[] lonlat = map.TileToWorldPos(c_x + nav_hit.x/10, c_y - nav_hit.z / 10, zoom);
                 goalMarker.init(lonlat[1], lonlat[0]);
-                navigateDialogue.GetComponent<NavigationDialogueScript>().lat = lonlat[1];
-                navigateDialogue.GetComponent<NavigationDialogueScript>().lon = lonlat[0];
-                navigateDialogue.GetComponent<NavigationDialogueScript>().show();
+                //navigateDialogue.GetComponent<NavigationDialogueScript>().lat = lonlat[1];
+                //navigateDialogue.GetComponent<NavigationDialogueScript>().lon = lonlat[0];
+                //navigateDialogue.GetComponent<NavigationDialogueScript>().show();
             }
         }
 
