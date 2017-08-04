@@ -79,6 +79,13 @@ public class DistrictArrow : MonoBehaviour, IPointerClickHandler {
         map.updateCenter();
 
         float offset = (360 + this.offset_x) / 360;
+        //hardcoded Horse on Altmarkt -- to be removed -- only for DEMO
+        if (this.district_name.Equals("Altmarkt"))
+            GameObject.Find("HorseContainer").transform.FindChild("Horse").gameObject.SetActive(true);
+        else
+            GameObject.Find("HorseContainer").transform.FindChild("Horse").gameObject.SetActive(false);
+
+
         GameObject.Find("skybox_container").GetComponent<Skybox>().showDistrict(this.skybox_img, offset);
         GameObject.Find("DistrictArrowHandler").GetComponent<DistrictArrowHandler>().enableDistrictArrowsCollider();
     }

@@ -177,8 +177,8 @@ public class Map : MonoBehaviour {
 
         lat = 51.049456;
         lon = 13.737441;
-        GameObject.Find("skybox_container").GetComponent<Skybox>().showDistrict("http://mapmo.de/wp-content/uploads/R0010189_20170721150835.jpg", 1.845f);
-
+        GameObject.Find("skybox_container").GetComponent<Skybox>().showDistrict("http://mapmo.de/wp-content/uploads/R0010189_20170721150835.jpg", 1.837f);
+        GameObject.Find("HorseContainer").transform.FindChild("Horse").gameObject.SetActive(true);
         ////lat = 51.0291588;
         ////lon = 13.7194578;
         ////lat = 50.110479;
