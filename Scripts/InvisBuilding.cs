@@ -4,6 +4,7 @@ using UnityEngine;
 using Assets;
 using Assets.Scripts;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class InvisBuilding : MonoBehaviour {
 
@@ -23,8 +24,11 @@ public class InvisBuilding : MonoBehaviour {
     public List<Poi> pois;
     public float s = 0.00025f;
     public float building_icon_width = 600;
-    Color highlight_color = new Color(65f / 255f, 133f / 255f, 227f / 255f, 133f / 255f);
-    Color unhighlight_color = new Color(0, 0, 0, 133f / 255f);
+    Color highlight_color1 = new Color(4f / 190f, 133f / 254f, 227f / 255f, 222f / 255f);
+    Color highlight_color2 = new Color(68f / 255f, 129f / 255f, 227f / 235f, 222f / 255f);
+    Color unhighlight_color = new Color(0, 0, 0, 110f / 255f);
+    public Material unhighlight_material;
+    public Material highlight_material;
     // Use this for initialization
     void Start () {
                
@@ -51,7 +55,8 @@ public class InvisBuilding : MonoBehaviour {
     {
         if (building_icon.activeSelf)
         {
-            building_icon.GetComponent<UnityEngine.UI.Image>().color = highlight_color;
+            building_icon.GetComponent<Image>().material = highlight_material;
+            //building_icon.GetComponent<UnityEngine.UI.Image>().color = highlight_color;
         }
     }
 
@@ -59,7 +64,8 @@ public class InvisBuilding : MonoBehaviour {
     {
         if (building_icon.activeSelf)
         {
-            building_icon.GetComponent<UnityEngine.UI.Image>().color = unhighlight_color;
+            building_icon.GetComponent<Image>().material = unhighlight_material;
+            //building_icon.GetComponent<UnityEngine.UI.Image>().color = unhighlight_color;
         }
     }
 
